@@ -1,0 +1,85 @@
+<section class="content-main">
+
+  <div class="content-header">
+    <h2 class="content-title">Lista Post</h2>
+    <div>
+      <a (click)="navigateToList()" class="btn btn-success">
+        <i class="material-icons md-grid_on"></i>
+        Grid View
+      </a>
+    </div>
+  </div>
+  <div class="card mb-4">
+    <!-- Inizio Header -->
+    <header class="card-header">
+      <div class="row gx-3">
+					<div class="col-lg-4 col-md-6 me-auto">
+						<input type="text" placeholder="Cerca..."  [(ngModel)]="this.filter" class="form-control">
+					</div>
+					<div class="col-lg-2 col-6 col-md-3">
+						<select class="form-select">
+							<option>Mostra 20</option>
+							<option>Mostra 30</option>
+							<option>Mostra 40</option>
+						</select>
+					</div>
+				</div>
+    </header> <!-- Fine Header -->
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+							<th scope="col">Id</th>
+							<th scope="col">Titolo</th>
+							<th scope="col">Body</th>
+							<th scope="col">Posted By</th>
+							<th scope="col" class="text-end"> Azione </th>
+						</tr>
+          </thead>
+          <tbody>
+            @for(post of filteredPosts | paginate: { itemsPerPage: line, currentPage: page }; track post.id){
+              <tr>
+                <td class="tbl-string">{{post.id}}</td>
+                <td class="tbl-string">{{post.title}}</td>
+                <td class="tbl-string">{{post.body}}</td>
+                <td class="tbl-string">{{post.userName}}</td>
+                <td class="tbl-string infoBadge">
+                </td>
+                <td class="text-end">
+                  <!-- @if(isAdmin){
+                    <button (click)="deleteItem(articolo.codart)" class="btn btn-light text-danger">Elimina</button>
+                  }@else {
+                    <button (click)="deleteItem(articolo.codart)" disabled class="btn btn-light text-danger">Elimina</button>
+                  } -->
+                  <div class="dropdown">
+                    <button data-bs-toggle="dropdown" class="btn btn-light">
+                      <i class="material-icons md-more_horiz"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Dettaglio</a></li>
+                      <li><a class="dropdown-item" href="#">Info</a></li>
+                      <!-- <li><a class="dropdown-item" (click)="modifyItem(articolo.codart)">Modifica</a></li> -->
+                    </ul>
+                  </div> <!-- dropdown //end -->
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- Paginazione -->
+        <nav class="float-end mt-3" aria-label="Page navigation">
+        <pagination-controls
+         class="my-pagination"
+         (pageChange)="page = $event"
+          previousLabel="Previous"
+          nextLabel="Next"
+        >
+        </pagination-controls>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>

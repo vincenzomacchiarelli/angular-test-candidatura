@@ -1,0 +1,19 @@
+<div class="background">
+  <div id="main-content">
+  <h4>Nome e Cognome:</h4>
+  <h1>{{user$?.name}}</h1>
+  <h4>Username:</h4>
+  <h3>{{user$?.username}}</h3>
+  <h4>Residente a:</h4>
+  <p>{{user$?.address?.city}} {{user$?.address?.street}} {{user$?.address?.suite}} {{user$?.address?.zipcode}}</p>
+  <h4>Lavora per:</h4>
+  <p>{{user$?.company?.name}}</p>
+  <br>
+  <span>Di più su : {{user$?.username}}</span>
+  <ul>
+  <li>Telefono: {{user$?.phone}}</li>
+  <li>Email: {{user$?.email}}</li>
+  </ul>
+  <button (click)="goBack()">torna indietro</button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="background">
+  <div id="main-content">
+  <h4>Autore:</h4>
+  <h1>{{user$?.name}}</h1>
+  <h4>Titolo:</h4>
+  <h3>{{post$?.title}}</h3>
+  <h4>Contenuto:</h4>
+  <p>{{post$?.body}}</p>
+  <br>
+  <span>Di più su : {{user$?.username}}</span>
+  <ul>
+  <li>Telefono: {{user$?.phone}}</li>
+  <li>Email: {{user$?.email}}</li>
+  </ul>
+  <button (click)="goBack()">Scopri di più su {{user$?.name}}</button>
+  </div>
+</div>
