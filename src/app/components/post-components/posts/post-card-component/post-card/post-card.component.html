@@ -4,14 +4,14 @@
       <figure>
         <img [src]="this.image" />
       </figure>
-      <div class="article-body">
-        <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;">
-          <div (click)="this.checkUserDetails()" style="margin-right: 18px;"  class="btn btn-success">
+      <div  class="article-body">
+        <div  style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start;border-bottom: 1px solid #eeeeee; margin-bottom: 1em;">
+          <div (click)="this.checkUserDetails()" style="margin-right: 18px;margin-bottom: 8px; height: 50px;width: 50px; display: flex; align-items: center;"  class="btn btn-success">
             {{shortName}}
           </div>
-          <h2>{{item.title}}</h2>
+          <h2 style="font-size: 2rem;">{{item.title}}</h2>
         </div>
-        <p>
+        <p class="bodyShow" style="font-size: 1rem; font-weight: 400; line-height: 1.5em; margin-top: 1em; margin-bottom: 1em;">
           {{item.body}}
         </p>
         <a style="cursor: pointer;" (click)="viewMore()" class="read-more">
@@ -20,6 +20,8 @@
             <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </a>
+
+        <button *ngIf="isAdmin === 'true'" (click)="this.deletePost()" style="margin-left: 20px;" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </article>

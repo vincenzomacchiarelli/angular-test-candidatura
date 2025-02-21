@@ -13,12 +13,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-posts-grid',
   standalone: true,
-  imports: [PostCardComponent,CommonModule,NgxPaginationModule,FormsModule],
+  imports: [PostCardComponent, CommonModule, NgxPaginationModule, FormsModule],
   templateUrl: './posts-grid.component.html',
-  styleUrl: './posts-grid.component.css'
+  styleUrl: './posts-grid.component.css',
 })
 export class PostsGridComponent {
-  @ViewChild('gridView') child:any;
+
+  @ViewChild('gridView') child: any;
   posts$: Post[] = [];
   users$: User[] = [];
   errorMsg: string = '';
@@ -26,17 +27,21 @@ export class PostsGridComponent {
   line: number = 20;
   filter: string = '';
 
- constructor(private postService: PostService,private userService: UserService,private router:Router) { }
+  constructor(
+    private postService: PostService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.getPostsAndUserDetails();
- }
+  }
 
- getPostsAndUserDetails = () => {
-  return forkJoin({
-    posts: this.postService.getPosts(),
-    users: this.userService.getUsers(),
-  }).subscribe(response => {
+  getPostsAndUserDetails = () => {
+    return forkJoin({
+      posts: this.postService.getPosts(),
+      users: this.userService.getUsers(),
+    }).subscribe((response) => {
       this.posts$ = response.posts;
       this.users$ = response.users;
       for (let i = 0; i < this.posts$.length; i++) {
@@ -46,34 +51,36 @@ export class PostsGridComponent {
           }
         }
       }
+    });
+  };
+
+  get filteredPosts(): Post[] {
+    if (!this.filter) {
+      return this.posts$;
     }
-  )
-}
+    const lowerCaseFilter = this.filter.toLowerCase();
 
-get filteredPosts(): Post[] {
-  if (!this.filter) {
-    return this.posts$;
+    return this.posts$.filter((post) => {
+      return (
+        post.title.toLowerCase().includes(lowerCaseFilter) ||
+        post.userName.toLowerCase().includes(lowerCaseFilter) ||
+        post.body.toLowerCase().includes(lowerCaseFilter)
+      );
+    });
   }
-  const lowerCaseFilter = this.filter.toLowerCase();
 
-  return this.posts$.filter((post) => {
-    return (
-      post.title.toLowerCase().includes(lowerCaseFilter) ||
-      post.userName.toLowerCase().includes(lowerCaseFilter) ||
-      post.body.toLowerCase().includes(lowerCaseFilter)
+  handleEdit = (articolo: Post) => {
+    console.log('Cliccato tasto modifica del codice ' + articolo.id);
+  };
+
+  handleDelete = (articolo: Post) => {
+    this.posts$.splice(
+      this.posts$.findIndex((x) => x.id === articolo.id),
+      1
     );
-  });
-}
+  };
 
- handleEdit = (articolo : Post) => {
-   console.log("Cliccato tasto modifica del codice " + articolo.id);
- }
-
- handleDelete = (articolo : Post) => {
-   this.posts$.splice(this.posts$.findIndex(x => x.id === articolo.id), 1);
- }
-
- navigateBack = () => {
-   this.router.navigate(['/post/list']);
- }
+  navigateBack = () => {
+    this.router.navigate(['/post/list']);
+  };
 }

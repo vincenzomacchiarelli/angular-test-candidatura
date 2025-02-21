@@ -19,6 +19,6 @@ export class AvatarComponent {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('isLogged: ' + this.isLogged + ' userName: ' + this.userName);
+
   }
 }

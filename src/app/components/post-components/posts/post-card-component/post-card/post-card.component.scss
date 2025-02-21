@@ -73,6 +73,14 @@ article:has(:hover, :focus) {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
+.bodyShow {
+  display: none;
+}
+article:has(:hover, :focus) .bodyShow {
+  display: block;
+  transition: all 0.3s;
+}
+
 
 .articles {
   display: grid;
@@ -102,3 +110,4 @@ article:has(:hover, :focus) {
   white-space: nowrap;
   width: 1px;
 }
+
