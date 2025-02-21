@@ -1,0 +1,18 @@
+<div class="jumbotron jumbotron-billboard">
+	<div class="img"></div>
+		<div style="margin-top: 80px;" class="container">
+			<div class="row">
+				<div class="col-lg-12">
+          <ng-container *ngIf="Show">
+            @if(!isLogin){
+              <h1 >Benvenuto User</h1>
+            }@else {
+              <h1>Benvenuto Admin</h1>
+            }
+          </ng-container>
+					<h2>Il nostro blog conta {{title}} Articoli al Momento</h2>
+					<h3>E ben {{subtitle}} scrittori!</h3>
+				</div>
+			</div>
+	</div>
+</div>

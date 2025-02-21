@@ -1,0 +1,47 @@
+
+
+.jumbotron-billboard .img {
+	margin-bottom: 0px;
+	opacity: 0.6;
+	color: #fff;
+	background: #000 url(https://plus.unsplash.com/premium_photo-1684581214880-2043e5bc8b8b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmxvZyUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D)
+    center center no-repeat;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.jumbotron h2 {
+	margin-top: 0;
+}
+
+.jumbotron {
+	position: relative;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	min-height: 150px;
+  margin-bottom: 0.5%;
+}
+
+.jumbotron .container {
+	position: relative;
+	z-index: 2;
+  flex: 0 0 auto;
+  width: 30%;
+  background: rgb(0 0 0 / 27%);
+}
+
+h1,h2,h3{
+  margin: 0 0 18px 0;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.06em;
+  color: var(--title-color);
+  transition: color 0.3sease-out;
+}
+

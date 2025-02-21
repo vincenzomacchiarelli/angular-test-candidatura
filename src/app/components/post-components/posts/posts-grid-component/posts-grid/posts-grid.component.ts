@@ -45,6 +45,7 @@ export class PostsGridComponent {
     }).subscribe((response) => {
       this.posts$ = response.posts;
       this.users$ = response.users;
+      this.postService.setJumbotronInfos(response.posts.length, response.users.length);
       for (let i = 0; i < this.posts$.length; i++) {
         for (let j = 0; j < this.users$.length; j++) {
           if (this.posts$[i].userId === this.users$[j].id) {
@@ -79,6 +80,7 @@ export class PostsGridComponent {
       this.posts$.findIndex((x) => x.id === articolo.id),
       1
     );
+    this.postService.setJumbotronInfos(this.posts$.length, this.users$.length);
   };
 
   navigateBack = () => {
