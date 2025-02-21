@@ -26,6 +26,8 @@ export class PostsGridComponent {
   page: number = 1;
   line: number = 14;
   filter: string = '';
+  currentPostCount: number = 0;
+  currentUserCount: number = 0;
 
 
   constructor(
@@ -45,7 +47,12 @@ export class PostsGridComponent {
     }).subscribe((response) => {
       this.posts$ = response.posts;
       this.users$ = response.users;
-      this.postService.setJumbotronInfos(response.posts.length, response.users.length);
+      this.postService.getJumbotronInfos().subscribe((infos) => {
+        this.currentPostCount = infos.title;
+        this.currentUserCount = infos.subtitle;
+      })
+      let newNumberOfPosts = this.posts$.length - this.currentPostCount;
+      this.posts$.splice(0,newNumberOfPosts);
       for (let i = 0; i < this.posts$.length; i++) {
         for (let j = 0; j < this.users$.length; j++) {
           if (this.posts$[i].userId === this.users$[j].id) {

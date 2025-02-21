@@ -8,11 +8,12 @@ import { forkJoin } from 'rxjs';
 import { User } from '../../../../models/user.interface';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { JumbotronComponent } from '../../../jumbotron/jumbotron/jumbotron.component';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule, FormsModule],
+  imports: [CommonModule, NgxPaginationModule, FormsModule ,JumbotronComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
@@ -30,6 +31,8 @@ export class PostComponent implements OnInit {
   userName: string = '';
   filter: string = '';
   isAdmin: boolean = false;
+  currentPostCount: number = 0;
+  currentUserCount: number = 0;
 
   ngOnInit(): void {
     sessionStorage.getItem('isAdmin') === 'true'
@@ -43,8 +46,14 @@ export class PostComponent implements OnInit {
       posts: this.postService.getPosts(),
       users: this.userService.getUsers(),
     }).subscribe((response) => {
+      this.postService.getJumbotronInfos().subscribe((infos) => {
+        this.currentPostCount = infos.title;
+        this.currentUserCount = infos.subtitle;
+      })
       this.posts$ = response.posts;
       this.users$ = response.users;
+      let newNumberOfPosts = this.posts$.length - this.currentPostCount;
+      this.posts$.splice(0, newNumberOfPosts);
       for (let i = 0; i < this.posts$.length; i++) {
         for (let j = 0; j < this.users$.length; j++) {
           if (this.posts$[i].userId === this.users$[j].id) {
@@ -76,6 +85,7 @@ export class PostComponent implements OnInit {
   deletePost = (id: any) => {
     let index = this.posts$.findIndex((post) => post.id === id);
     this.posts$.splice(index, 1);
+    this.postService.setJumbotronInfos(this.posts$.length, this.users$.length);
   };
 
   navigateToSinglePost = (id: number,userId:number) => {

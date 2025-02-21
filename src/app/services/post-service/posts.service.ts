@@ -7,7 +7,7 @@ import { BehaviorSubject} from "rxjs";
     providedIn: 'root'
 })
 export class PostService {
-  jumbotronInfos: BehaviorSubject<{title: number, subtitle: number}> = new BehaviorSubject({title: 0, subtitle: 0});
+  jumbotronInfos = new BehaviorSubject({title: 100, subtitle: 10});
     constructor(private http: HttpClient) {
     }
     getPosts() {
@@ -19,7 +19,6 @@ export class PostService {
     }
 
     setJumbotronInfos(title: number, subtitle: number) {
-
       this.jumbotronInfos.next({title, subtitle});
     }
 
