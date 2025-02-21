@@ -74,7 +74,8 @@ export class PostComponent implements OnInit {
     this.router.navigate(['welcome']);
   };
   deletePost = (id: any) => {
-    this.posts$ = this.posts$.filter((post) => post.id !== id);
+    let index = this.posts$.findIndex((post) => post.id === id);
+    this.posts$.splice(index, 1);
   };
 
   navigateToSinglePost = (id: number,userId:number) => {
