@@ -79,6 +79,9 @@ article:has(:hover, :focus) {
 article:has(:hover, :focus) .bodyShow {
   display: block;
   transition: all 0.3s;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
 }
 
 

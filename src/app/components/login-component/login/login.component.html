@@ -1,15 +1,18 @@
-<div class="log-form">
-  <h2 style="color:white;">Esegui il login per accedere</h2>
-  <form #form="ngForm" (ngSubmit)="login()">
-    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="userName" type="text" title="username" placeholder="username" />
-    <input [ngModelOptions]="{standalone: true}" [(ngModel)]="password"  type="password" title="username" placeholder="password" />
-    <div>
-      <button style="width: 100%;" type="submit" class="btn">Login</button>
-    </div>
-  </form>
-  @if(this.errMsg) {
-    <div class="alert alert-danger" >
-      <span style="width: 100%; display: flex;justify-content: center;" >{{errMsg}}</span>
-    </div>
-  }
-</div>
+<body>
+
+  <div class="log-form">
+    <h2 style="color:white;">Esegui il login per accedere</h2>
+    <form #form="ngForm" (ngSubmit)="login()">
+      <input [ngModelOptions]="{standalone: true}" [(ngModel)]="userName" type="text" title="username" placeholder="username" />
+      <input [ngModelOptions]="{standalone: true}" [(ngModel)]="password"  type="password" title="username" placeholder="password" />
+      <div>
+        <button style="width: 100%;" type="submit" class="btn">Login</button>
+      </div>
+    </form>
+    @if(this.errMsg) {
+      <div class="alert alert-danger" >
+        <span style="width: 100%; display: flex;justify-content: center;" >{{errMsg}}</span>
+      </div>
+    }
+  </div>
+</body>

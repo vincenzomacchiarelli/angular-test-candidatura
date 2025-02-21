@@ -20,6 +20,8 @@ body.offcanvas-active {
   padding: 30px 3%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 80px;
+
   background-color: rgb(255, 255, 255);
   margin-bottom: 20px;
 }
