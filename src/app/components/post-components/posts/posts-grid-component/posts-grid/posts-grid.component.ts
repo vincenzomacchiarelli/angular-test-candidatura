@@ -24,7 +24,7 @@ export class PostsGridComponent {
   users$: User[] = [];
   errorMsg: string = '';
   page: number = 1;
-  line: number = 20;
+  line: number = 14;
   filter: string = '';
 
 

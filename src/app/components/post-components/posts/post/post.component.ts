@@ -30,7 +30,6 @@ export class PostComponent implements OnInit {
   userName: string = '';
   filter: string = '';
   isAdmin: boolean = false;
-  @Output('elimina-card') delete = new EventEmitter<Post>();
 
   ngOnInit(): void {
     sessionStorage.getItem('isAdmin') === 'true'

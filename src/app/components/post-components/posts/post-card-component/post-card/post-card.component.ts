@@ -21,7 +21,6 @@ export class PostCardComponent {
   shortName: string = '';
 
   @Output('elimina-card') delete = new EventEmitter<Post>();
-  @Output() edit = new EventEmitter<Post>();
 
   imageList = [
     'https://picsum.photos/id/1011/800/450',

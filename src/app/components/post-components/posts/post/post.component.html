@@ -14,7 +14,7 @@
     <header class="card-header">
       <div class="row gx-3">
 					<div class="col-lg-4 col-md-6 me-auto">
-						<input type="text" placeholder="Cerca..."  [(ngModel)]="this.filter" class="form-control">
+						<input type="text" placeholder="Cerca Per Nome Autore, Titolo ..."  [(ngModel)]="this.filter" class="form-control">
 					</div>
 				</div>
     </header> <!-- Fine Header -->
@@ -27,7 +27,7 @@
 							<th scope="col">Id</th>
 							<th scope="col">Titolo</th>
 							<th scope="col">Body</th>
-							<th scope="col">Posted By</th>
+							<th scope="col">Pubblicato da</th>
 							<th *ngIf="isAdmin" scope="col" class="text-end"> Elimina </th>
               <th  scope="col" class="text-end"> Visualizza </th>
 						</tr>

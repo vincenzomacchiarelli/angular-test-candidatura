@@ -14,7 +14,7 @@
       <header class="card-header">
       <div class="row gx-3">
         <div class="col-lg-4 col-md-6 me-auto">
-          <input type="text"  placeholder="Cerca..." [(ngModel)]="filter"  class="form-control">
+          <input type="text"  placeholder="Cerca Per Nome Autore, Titolo ..." [(ngModel)]="filter"  class="form-control">
         </div>
       </div>
     </header>
@@ -26,7 +26,6 @@
         *ngFor="let post of filteredPosts | paginate: { itemsPerPage: line, currentPage: page };"
         [item-card] = "post"
         (elimina-card) = "handleDelete($event)"
-        (edit) = "handleEdit($event)"
         ></app-post-card>
       </div>
 
