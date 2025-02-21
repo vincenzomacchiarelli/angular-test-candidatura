@@ -13,8 +13,7 @@ export class AvatarComponent {
 
   @Input()
   isLogged : boolean = false;
-  @Input()
-  userName : string | null = "";
+
 
   constructor() { }
 

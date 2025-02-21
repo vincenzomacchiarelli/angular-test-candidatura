@@ -38,4 +38,8 @@ export class HeaderComponent implements OnInit ,AfterViewChecked {
     this.router.navigate(['/login']);
   }
 
+  goToHome = () => {
+    this.router.navigate(['/']);
+  }
+
 }

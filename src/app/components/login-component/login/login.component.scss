@@ -19,7 +19,8 @@ transform: translate(-50%,-50%);
   @media(max-width: 40em){
     width: 95%;
     position: relative;
-    margin: 2.5% auto 0 auto;
+    margin-top: -200px;
+    margin-left: 8px;
     left: 0%;
   -webkit-transform: translate(0%,0%);
 -moz-transform: translate(0%,0%);
@@ -100,8 +101,7 @@ transform: translate(0%,0%);
     &:hover {
       color:darken(blue, 5%);
     }
-    &:active{
-    }
+
   }
 
 }
