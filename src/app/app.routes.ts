@@ -20,24 +20,30 @@ export const routes: Routes = [
   },
   {
     path:'welcome',
-    canActivateChild: [AuthInterceptor],
-    component: WelcomeComponent
-  },
-
+    loadComponent: () => import('./components/welcome-component/welcome/welcome.component')
+    .then(m => m.WelcomeComponent),
+     canActivateChild:[AuthInterceptor],
+},
   {
     path:'post/list',
-    canActivateChild: [AuthInterceptor],
-    component: PostComponent
-  },
+    loadComponent: () => import('./components/post-components/posts/post/post.component')
+    .then(m => m.PostComponent),
+     canActivateChild:[AuthInterceptor],
+},
   {
     path: 'post/:id/autore/:id',
-    canActivateChild: [AuthInterceptor],
-    component: SinglePostComponent
+    loadComponent: () => import('./components/post-components/posts/post/single-post-component/single-post/single-post.component').then(m => m.SinglePostComponent),
+    canActivateChild: [AuthInterceptor]
   },
   {
     path: 'autore/:id',
-    canActivateChild: [AuthInterceptor],
-    component: UserInfoComponent
+    loadComponent: () => import('./components/user-component/user-info/user-info.component').then(m => m.UserInfoComponent),
+    canActivateChild: [AuthInterceptor]
   },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  }
 
 ];

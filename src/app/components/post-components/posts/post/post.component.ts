@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PostService } from '../../../../services/post-service/posts.service';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../../models/post.interface';
@@ -12,35 +12,38 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule,NgxPaginationModule,FormsModule],
+  imports: [CommonModule, NgxPaginationModule, FormsModule],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.css'
+  styleUrl: './post.component.css',
 })
 export class PostComponent implements OnInit {
-
   constructor(
-   private postService: PostService,
-   private userService: UserService,
-   private router: Router
-  ) { }
+    private postService: PostService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
-   posts$: Post[] = [];
-   users$: User[] = [];
-   page: number = 1;
-   line: number = 20;
-   userName: string = "";
-   filter: string = '';
-
+  posts$: Post[] = [];
+  users$: User[] = [];
+  page: number = 1;
+  line: number = 20;
+  userName: string = '';
+  filter: string = '';
+  isAdmin: boolean = false;
+  @Output('elimina-card') delete = new EventEmitter<Post>();
 
   ngOnInit(): void {
+    sessionStorage.getItem('isAdmin') === 'true'
+      ? (this.isAdmin = true)
+      : (this.isAdmin = false);
     this.getPostsAndUserDetails();
   }
 
-getPostsAndUserDetails = () => {
-  return forkJoin({
-    posts: this.postService.getPosts(),
-    users: this.userService.getUsers(),
-  }).subscribe(response => {
+  getPostsAndUserDetails = () => {
+    return forkJoin({
+      posts: this.postService.getPosts(),
+      users: this.userService.getUsers(),
+    }).subscribe((response) => {
       this.posts$ = response.posts;
       this.users$ = response.users;
       for (let i = 0; i < this.posts$.length; i++) {
@@ -50,28 +53,32 @@ getPostsAndUserDetails = () => {
           }
         }
       }
+    });
+  };
+
+  get filteredPosts(): Post[] {
+    if (!this.filter) {
+      return this.posts$;
     }
-  )
-}
+    const lowerCaseFilter = this.filter.toLowerCase();
 
-get filteredPosts(): Post[] {
-  if (!this.filter) {
-    return this.posts$;
+    return this.posts$.filter((post) => {
+      return (
+        post.title.toLowerCase().includes(lowerCaseFilter) ||
+        post.userName.toLowerCase().includes(lowerCaseFilter) ||
+        post.body.toLowerCase().includes(lowerCaseFilter)
+      );
+    });
   }
-  const lowerCaseFilter = this.filter.toLowerCase();
 
-  return this.posts$.filter((post) => {
-    return (
-      post.title.toLowerCase().includes(lowerCaseFilter) ||
-      post.userName.toLowerCase().includes(lowerCaseFilter) ||
-      post.body.toLowerCase().includes(lowerCaseFilter)
-    );
-  });
-}
+  navigateToList = () => {
+    this.router.navigate(['welcome']);
+  };
+  deletePost = (id: any) => {
+    this.posts$ = this.posts$.filter((post) => post.id !== id);
+  };
 
-
-navigateToList = () => {
- this.router.navigate(['welcome']);
-
-}
+  navigateToSinglePost = (id: number,userId:number) => {
+    this.router.navigate(['/post',id, 'autore', userId]);
+  };
 }

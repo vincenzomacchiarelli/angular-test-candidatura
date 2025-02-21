@@ -28,7 +28,8 @@
 							<th scope="col">Titolo</th>
 							<th scope="col">Body</th>
 							<th scope="col">Posted By</th>
-							<th scope="col" class="text-end"> Azione </th>
+							<th *ngIf="isAdmin" scope="col" class="text-end"> Elimina </th>
+              <th  scope="col" class="text-end"> Visualizza </th>
 						</tr>
           </thead>
           <tbody>
@@ -38,20 +39,14 @@
                 <td class="tbl-string">{{post.title}}</td>
                 <td class="tbl-string">{{post.body}}</td>
                 <td class="tbl-string">{{post.userName}}</td>
-                <td class="tbl-string infoBadge">
+                <td *ngIf="isAdmin" class="tbl-string infoBadge">
+                  <button  (click)="this.deletePost(post.id)" style="margin-left: 20px;" class="btn btn-danger">Elimina</button>
                 </td>
-                <td class="text-end">
-                  <div class="dropdown">
-                    <button data-bs-toggle="dropdown" class="btn btn-light">
-                      <i class="material-icons md-more_horiz"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Dettaglio</a></li>
-                      <li><a class="dropdown-item" href="#">Info</a></li>
-                    </ul>
-                  </div> <!-- dropdown //end -->
+                <td  class="tbl-string infoBadge">
+                  <button  (click)="this.navigateToSinglePost(post.id,post.userId)" style="margin-left: 20px;" class="btn btn-primary">Visualizza</button>
                 </td>
               </tr>
+
             }
           </tbody>
         </table>

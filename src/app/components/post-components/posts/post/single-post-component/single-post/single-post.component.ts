@@ -17,8 +17,8 @@ export class SinglePostComponent implements OnInit {
 
   postId: number = 0;
   userId: number = 0;
-  post$!: Post;
-  user$!: User;
+  post$!: Post | undefined | any;
+  user$!: User | undefined | any;
   constructor(private postService:PostService,
     private userService:UserService,
      private route:ActivatedRoute ,

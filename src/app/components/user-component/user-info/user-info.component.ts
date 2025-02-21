@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user-service/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../models/user.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css'
 })
 export class UserInfoComponent implements OnInit {
   postId: number = 0;
   userId: number = 0;
-  user$!: User;
+  user$: User | any;
+
   constructor(
     private userService:UserService,
      private route:ActivatedRoute ,
@@ -29,7 +31,7 @@ export class UserInfoComponent implements OnInit {
 
   getSingleUser = () => {
      this.userService.getUserById(this.userId).subscribe(user => {
-      this.user$ = user;
+        this.user$ = user;
     });
   }
 

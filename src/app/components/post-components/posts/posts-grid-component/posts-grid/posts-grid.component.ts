@@ -27,6 +27,7 @@ export class PostsGridComponent {
   line: number = 20;
   filter: string = '';
 
+
   constructor(
     private postService: PostService,
     private userService: UserService,
